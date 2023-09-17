@@ -1,0 +1,75 @@
+using System;
+
+class ScoringSystem
+{
+    private int score;
+
+    public ScoringSystem()
+    {
+        score = 0;
+    }
+
+    public void AddPoints(int points)
+    {
+        if (points < 0)
+        {
+            Console.WriteLine("Points cannot be negative.");
+            return;
+        }
+
+        score += points;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ScoringSystem scoringSystem = new ScoringSystem();
+
+        Console.WriteLine("Welcome to the scoring system!");
+
+        while (true)
+        {
+            Console.WriteLine($"Current Score: {scoringSystem.GetScore()}");
+            Console.WriteLine("1. Add points");
+            Console.WriteLine("2. Exit");
+            Console.Write("Enter your choice: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int choice))
+            {
+                Console.WriteLine("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter the points to add: ");
+                    if (int.TryParse(Console.ReadLine(), out int pointsToAdd))
+                    {
+                        scoringSystem.AddPoints(pointsToAdd);
+                        Console.WriteLine($"Added {pointsToAdd} points.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a number.");
+                    }
+                    break;
+
+                case 2:
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+}
+
